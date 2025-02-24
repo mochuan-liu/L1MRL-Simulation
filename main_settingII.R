@@ -1,8 +1,7 @@
 setwd('change_to_your_own_working_directory')
-setwd('/Users/mochuanliu/Documents/Zeng/br_3/Rcode/test_4_trial(git)')
 
 source('./optim_functions.R')    # auxiliary functions of L1-MRL
-source('./compared_methods.R')  # functions for conducting compared methods 
+source('./compared_methods.R')  # functions for conducting the competing methods 
 source('./summary_functions.R') # auxiliary functions for summarizing the simulations results
 
 # # set up random seed when simulation is conducted in parallel 
@@ -174,8 +173,8 @@ beta_L1MRL <- res_l1mrl$coef_list
 ################################################################################
 beta_A <- alearning(Y, A1, A2, H1, H2, P1, P2) # A-learning
 beta_Q <- qlearning(Y, A1, A2, H1, H2, P1, P2) # Q-learning
-beta_O <- olearning(Y, A1, A2, H1, H2, P1, P2) # L1 O-learning
-beta_WLS <- wl(Y, A1, A2, H1, H2, P1, P2)      # WLS
+beta_O <- olearning(Y, A1, A2, H1, H2, P1, P2) # O-learning
+beta_dWOLS <- dWOLS(Y, A1, A2, H1, H2, P1, P2)      # dWOLS
 
 
 ################################################################################
@@ -190,15 +189,15 @@ P_list_testing <- dat_testing$P_list_testing
 P_testing <- ifelse(A_list_testing[[1]]==1, P_list_testing[[1]], 1 - P_list_testing[[1]])*ifelse(A_list_testing[[2]]==1, P_list_testing[[2]], 1 - P_list_testing[[2]])
 
 dat_summary <- c()
-dat_summary <- rbind(dat_summary, sum_fun(beta_L1MRL, dat_testing, method = 'L1MRL'))
+dat_summary <- rbind(dat_summary, sum_fun(beta_L1MRL, dat_testing, method = 'L1-MRL'))
 dat_summary <- rbind(dat_summary, sum_fun(beta_A, dat_testing, method = 'A-learning'))
 dat_summary <- rbind(dat_summary, sum_fun(beta_Q, dat_testing, method = 'Q-learning'))
-dat_summary <- rbind(dat_summary, sum_fun(beta_O, dat_testing, method = 'L1 O-learning'))
-dat_summary <- rbind(dat_summary, sum_fun(beta_WLS, dat_testing, method = 'WLS'))
+dat_summary <- rbind(dat_summary, sum_fun(beta_O, dat_testing, method = 'O-learning'))
+dat_summary <- rbind(dat_summary, sum_fun(beta_dWOLS, dat_testing, method = 'dWOLS'))
 
 
 Out <- list(beta_L1MRL = beta_L1MRL, 
-            beta_A = beta_A, beta_Q = beta_Q, beta_O = beta_O, beta_WLS = beta_WLS,
+            beta_A = beta_A, beta_Q = beta_Q, beta_O = beta_O, beta_dWOLS = beta_dWOLS,
             dat_summary = dat_summary,
             lambda_L1MRL_selected = res_l1mrl$lambda, 
             eta_L1MRL_selected = res_l1mrl$eta, 

@@ -1,7 +1,7 @@
 setwd('your_data_directory/output')
 
-N <- 'your_own_N'  # set to 200 or 400 for simulation N=200 or N=400 respectively
-sim <- 'setting'   # set to 'SettingI' or 'SettingII' for simulation I or II respectively
+N <- 'your_own_N'  # set to 200 or 400 for simulation N=200 or N=400, respectively
+sim <- 'setting'   # set to 'SettingI' or 'SettingII' for simulation I or II, respectively
 
 # cell function 
 cell_string <- function(l){
@@ -11,7 +11,7 @@ cell_string <- function(l){
   med <- mean(l) |> round(3)
   dev <- sd(l) |> round(3)
   
-  return(sprintf('%0.3f(%0.3f)', med, dev))
+  return(sprintf('%0.3f (%0.3f)', med, dev))
 }
 
 # 

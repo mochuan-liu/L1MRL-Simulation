@@ -354,7 +354,7 @@ l1mrl_cv <- function(H_list, A_list, Y, P_vec, lambda_vec, eta_vec, mu, beta_ini
                        lambda = lambda_max, adaptive_coef = adaptive_coef, mu = mu, 
                        beta_init = beta_un_max, P = P, eta = eta_max), silent = TRUE)
     if(!is.character(S_final)){
-      out <- list(S = S_final, lambda = lambda_max, eta = eta_max)
+      out <- list(coef_list  = S_final, lambda = lambda_max, eta = eta_max)
     }else{
       out <- S_final
     }
@@ -368,7 +368,7 @@ l1mrl_cv <- function(H_list, A_list, Y, P_vec, lambda_vec, eta_vec, mu, beta_ini
     S_now <- l1mrl(H_list = H_list, A_list = A_list, Y = Y/P_vec, 
                  lambda = 0, adaptive_coef = adaptive_coef, mu = mu, 
                  beta_init = beta_init_un, P = P, eta = eta_now)
-    beta_un_list[[k]] <- list(S = S_now, eta = eta_now)
+    beta_un_list[[k]] <- list(coef_list  = S_now, eta = eta_now)
   }
   
   # sample indices
@@ -414,7 +414,7 @@ l1mrl_cv <- function(H_list, A_list, Y, P_vec, lambda_vec, eta_vec, mu, beta_ini
     
     for(l in 1:length(eta_vec)){
       if(beta_un_list[[l]]$eta==eta_now){
-        beta_un_now <- beta_un_list[[l]]$S
+        beta_un_now <- beta_un_list[[l]]$coef_list
         break
       }
     }
@@ -474,7 +474,7 @@ l1mrl_cv <- function(H_list, A_list, Y, P_vec, lambda_vec, eta_vec, mu, beta_ini
   
   for(l in 1:length(eta_vec)){
     if(beta_un_list[[l]]$eta==eta_max){
-      beta_un_max <- beta_un_list[[l]]$S
+      beta_un_max <- beta_un_list[[l]]$coef_list
       break
     }
   }

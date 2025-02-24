@@ -4,7 +4,7 @@
 # Depended package list can be found at 
 # GitHub repo https://github.com/cran/ITRSelect.
 # Please see  Shi, et al (2018) and 
-# https://github.com/cran/ITRSelect for details.
+# https://github.com/cran/ITRSelect for more details.
 ################################################################################
 source('./other_methods/alearning/PAL.control.R')
 source('./other_methods/alearning/PAL.fit.R')
@@ -69,17 +69,17 @@ olearning <- function(Y, A1, A2, H1, H2, P1, P2, lambda_vec = 10^(-5:5), cv.fold
 }
 
 ################################################################################
-# WLS:
-# The sourced file './wls/sail.R' is forked and modified from 
+# dWOLS:
+# The sourced file './dWOLS/sail.R' is forked and modified from 
 # GitHub repo https://github.com/ZeyuBian/pdwols.
 # Installation instruction of depended package 'sail' can be found 
 # in GitHub repo https://github.com/sahirbhatnagar/sail.
 # Please see Bian, et al (2023) for more information.
 ################################################################################
 require(sail) |> suppressMessages()
-source('./other_methods/wls/sail.R')
+source('./other_methods/dWOLS/sail.R')
 
-wls <- function(Y, A1, A2, H1, H2, P1, P2){
+dWOLS <- function(Y, A1, A2, H1, H2, P1, P2){
   
   beta_pd <- NULL
   
